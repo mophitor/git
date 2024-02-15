@@ -58,6 +58,7 @@ class _SignUpFormState extends State<SignUpForm> {
   final _firstNameTextController = TextEditingController();
   final _lastNameTextController = TextEditingController();
   final _usernameTextController = TextEditingController();
+  final _genderTextController = TextEditingController();
 
   double _formProgress = 0;
 
@@ -66,6 +67,7 @@ class _SignUpFormState extends State<SignUpForm> {
     final controllers = [
       _firstNameTextController,
       _lastNameTextController,
+      _genderTextController,
       _usernameTextController
     ];
 
@@ -114,6 +116,13 @@ class _SignUpFormState extends State<SignUpForm> {
               decoration: const InputDecoration(hintText: 'Логин'),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: _genderTextController,
+              decoration: const InputDecoration(hintText: 'Муж/Жен'),
+            ),
+          ),
           TextButton(
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.resolveWith(
@@ -131,6 +140,18 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             onPressed: _formProgress == 1 ? _showWelcomeScreen : null,
             child: const Text('Зарегистрироваться'),
+          ),
+          TextButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.resolveWith(
+                      (Set<MaterialState> states) {
+                    return states.contains(MaterialState.disabled)
+                        ? null
+                        : Colors.blue;
+                  }),
+            ),
+            onPressed: _formProgress == 1 ? _showWelcomeScreen : null,
+            child: const Text('Авторизация'),
           ),
         ],
       ),
@@ -201,4 +222,5 @@ class _AnimatedProgressIndicatorState extends State<AnimatedProgressIndicator>
       ),
     );
   }
+
 }
